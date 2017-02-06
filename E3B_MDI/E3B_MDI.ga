@@ -1,0 +1,39 @@
+/*
+Practica E3B
+MDI [161019]
+Image "Bat Opera" by Marvin Gaye Chetwynd [http://we-make-money-not-art.com/because-sometimes-all-you-need-is-bats/]
+Song "The Ballad Of Soap Und: Die GEMA Nimmt Kontakt Auf" by Jan Jelinek [https://youtu.be/rku7c4huYXQ]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+img = ofImage()
+snd = ofSoundPlayer()
+
+function setup()
+	img:loadImage(gaImportFile("MGChetwyndAreYouBats06.png"))
+	snd:loadSound(gaImportFile("03theballadofsoapund_diegemanimmtkontaktauf.mp3"), false)
+	snd:setLoop(true)
+	snd:play()
+end
+
+function update()
+	ofSoundUpdate()
+	// sound balance based on mouseX
+	sndPn = ofMap(gaMouseX(),OUTPUT_W-OUTPUT_W,OUTPUT_W,-1,1)
+	snd:setPan(sndPn)
+
+	// sound speed based on mouseY
+	sndSp = ofMap(gaMouseY(),OUTPUT_H-OUTPUT_H,OUTPUT_H,-0.5,2)
+	snd:setSpeed(sndSp)
+end
+
+function draw()
+     gaBackground(0.0,1.0)
+     
+     h = OUTPUT_H/2
+     w = (h/img:getHeight())*img:getWidth()
+     
+     ofSetColor(255)
+     img:setAnchorPoint(img:getWidth()/2, img:getHeight()/2);
+     img:draw(OUTPUT_W/2, OUTPUT_H/2, w, h)
+end

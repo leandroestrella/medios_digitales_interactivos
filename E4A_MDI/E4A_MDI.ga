@@ -1,0 +1,137 @@
+/*
+Practica E4A
+Interactividad en ratón [161107]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+// variables posicion
+x = 0
+y = 0
+n = 250
+
+// variables color
+cBack = 0
+cFillR = 0
+cFillG = 0
+cFillB = 0
+cFillA = 255
+cLine = 255
+cLineB = 0
+
+// variable tamano
+marS = 10
+
+function setup()
+	ofEnableSmoothing()
+end
+
+function update()
+	x = gaMouseX()
+	y = gaMouseY()
+end
+
+function draw()
+     gaBackground(cBack,1.0)
+     ofSetLineWidth(2)
+     
+     // RELLENO triangulos
+     ofFill()
+     ofSetColor(cFillR,cFillG,cFillB,cFillA)
+     // triangulo izquierdo
+     ofTriangle(x, y, n*2, n, n*2, OUTPUT_H-n)
+     // triangulo inferior
+     ofTriangle(x, y, n*2, OUTPUT_H-n, OUTPUT_W-n*2, OUTPUT_H-n)
+     // triangulo derecho
+     ofTriangle(x, y, OUTPUT_W-n*2, OUTPUT_H-n, OUTPUT_W-n*2, n)
+     // triangulo superior
+     ofTriangle(x, y, n*2, n, OUTPUT_W-n*2, n)
+     
+     // BORDE triangulos
+     ofNoFill()
+     ofSetColor(cLine)
+     // triangulo izquierdo
+     ofTriangle(x, y, n*2, n, n*2, OUTPUT_H-n)
+     // triangulo inferior
+     ofTriangle(x, y, n*2, OUTPUT_H-n, OUTPUT_W-n*2, OUTPUT_H-n)
+     // triangulo derecho
+     ofTriangle(x, y, OUTPUT_W-n*2, OUTPUT_H-n, OUTPUT_W-n*2, n)
+     // triangulo superior
+     ofTriangle(x, y, n*2, n, OUTPUT_W-n*2, n)
+     
+     // MARCADORES
+     // mitad superior
+     ofCircle(OUTPUT_W/2, 0, marS)
+     // mitad inferior
+     ofCircle(OUTPUT_W/2, OUTPUT_H, marS)
+     // mitad izquierda
+     ofCircle(0, OUTPUT_H/2, marS)
+     // mitad derecha
+     ofCircle(OUTPUT_W, OUTPUT_H/2, marS)
+     // esquina superior derecha
+	ofCircle(OUTPUT_W, 0, marS)
+	// esquina superior izquierda
+	ofCircle(0, 0, marS)
+	// esquina inferior derecha
+	ofCircle(OUTPUT_W, OUTPUT_H, marS)
+	// esquina inferior izquierda
+	ofCircle(0, OUTPUT_H, marS)
+	// centro
+	ofSetColor(cLineB)
+	ofCircle(OUTPUT_W/2, OUTPUT_H/2, marS)
+	
+	// RESET MARCADORES
+	if marS >= 1900 then
+		marS = 10
+		n = 250
+	end
+end
+
+function mouseMoved()
+	// COLOR
+	// esquina superior derecha
+	if x >= OUTPUT_W and y <= 0 then
+		cFillR = ofRandom(0,255)
+	// esquina superior izquierda
+	elseif x <= 0 and y <= 0 then
+		cFillG = ofRandom(0,255)
+	// esquina inferior derecha
+	elseif x >= OUTPUT_W and y >= OUTPUT_H then		cFillB = ofRandom(0,255)
+	// esquina inferior izquierda
+	elseif x <= 0 and y >= OUTPUT_H then
+		cFillA = ofRandom(255)
+	// TAMAÑO
+	// lado derecho
+	elseif x >= OUTPUT_W and y == OUTPUT_H/2 then
+		n = n*2
+	// lado inferior
+	elseif x == OUTPUT_W/2 and y >= OUTPUT_H then
+		n = n/4
+	// lado izquierdo
+	elseif x <= 0 and y == OUTPUT_H/2 then
+		n = n/2
+	// lado superior
+	elseif x == OUTPUT_W/2 and y <= 0 then
+		n = n*4
+	// centro
+	elseif x == OUTPUT_W/2 and y == OUTPUT_H/2 then
+		n = 250
+		marS = 10
+	endend
+
+function mousePressed()
+	cBack = 255
+	cLine = 0
+	cLineB = 255
+	cFillR = 0
+	cFillG = 0
+	cFillB = 0
+	cFillA = 0
+     marS = marS*1.5
+end
+
+function mouseReleased()
+	cBack = 0
+	cLine = 255
+	cLineB = 0
+	cFillA = 255
+end

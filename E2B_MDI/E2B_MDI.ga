@@ -1,0 +1,61 @@
+/*
+Practica E2B
+Estructuras de programación básicas
+Basics for loop structure example.
+[created by mj / modified by le]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+i = 0
+incI = 10
+inputVol = 0.0
+colFondo = 0.0
+
+function setup()
+    
+end
+
+function update()
+   i += incI
+    
+   if i > OUTPUT_H or i < 0 then
+   	incI *= - 1
+   end
+   
+   inputVol = gaGetVolume(0) * 1000
+   colFondo += inputVol
+   
+   // variable color
+	if inputVol > 0.04 then
+		colFondo *= inputVol
+	else
+		colFondo = 0.0
+	end
+	
+end
+
+function draw()
+	gaBackground(colFondo, 0.1)
+	
+	ofSetLineWidth(2)
+	
+	ofSetColor(30, 255, 255, 1)
+	for i = i, OUTPUT_W, 1 do
+		ofLine(OUTPUT_W, 0, OUTPUT_W/2+i, OUTPUT_H/4+i)
+	end
+	
+    	ofSetColor(255, 30, 255, 1)
+	for i = i, OUTPUT_W, 1 do
+		ofLine(OUTPUT_W/2+i, OUTPUT_H/4+i, 2+i, 2-i)
+	end
+	
+	ofSetColor(30, 30, 255, 1)
+	for i = -i, OUTPUT_W, 1 do
+		ofLine(2+i, 2-i, OUTPUT_H/2+i, OUTPUT_W/4+i)
+	end
+	
+	ofSetColor(255, 30, 30, 1)
+	for i = -i, OUTPUT_W, 1 do
+		ofLine(0, OUTPUT_H, OUTPUT_H/2+i, OUTPUT_W/4+i)
+	end
+end

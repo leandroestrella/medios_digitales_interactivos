@@ -1,0 +1,73 @@
+/*
+Practica E3AModified E65 [tabla imágenes/fnt/sound]
+Destroying some images from my pictures folder [161019]
+Song "Progettazione di Spazi Sonori AM459" by Leandro Estrella [https://soundcloud.com/estrellaleandro/progettazione-di-spazi-sonori]
+Font "Grotk" by Enoz [http://cargocollective.com/enozign]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/// fontfnt = ofTrueTypeFont()
+fntSz = 300
+fntTr = 255
+fntR = 255
+fntG = 0
+fntB = 25// sonido
+snd = ofSoundPlayer()// imagenimages = {} 		// declara tabla imagenescurrentImage = 0	// imagen actual numImages = 9   	// num total imagenes
+// Variables de Tiempowait = 100	// velocidad inicialslow = 500	// velocidad minimafast = 50		// velocidad maxima
+function setup()
+	// imagen	for i=0,numImages-1 do	// carga todas las imagenes		images[i] = ofImage()		images[i]:loadImage(gaDataPath(string.format("img_%i.jpg",i)))	end
+	
+	// sonido
+	snd:loadSound(gaImportFile("am459.mp3"), false)
+	snd:setLoop(true)
+	snd:play()
+	snd:setVolume(0.5)endfunction update()
+	// imagen	// Para calcular la velocidad de reproducción
+	ofSetColor(255)	if ofGetElapsedTimeMillis()  > wait then 		currentImage = (currentImage + 1) %  numImages		ofResetElapsedTimeCounter()	// resetea el contador de tiempo 	end
+	
+	// sonido
+	ofSoundUpdate()
+	sndSp = ofMap(gaMouseX(),OUTPUT_H-OUTPUT_H,OUTPUT_H,0.5,2)
+	snd:setSpeed(sndSp)end function draw()	gaBackground(0.0, 0.05)
+	
+	// imagen	ofSetColor(255)
+	// posicionar el anchor point de la imagen en su centro
+	images[currentImage]:setAnchorPoint(images[currentImage]:getWidth()/2, images[currentImage]:getHeight()/2)
+	// dibuja la imagen en el centro
+	images[currentImage]:draw(OUTPUT_W/2, OUTPUT_H/2)
+	// controlar velocidad con movimiento horizontal del mouse
+	wait = ofMap(gaMouseX(),OUTPUT_H-OUTPUT_H,OUTPUT_H,slow,fast)
+	
+	// input tecla d
+	if gaKey() == string.byte('d') then
+		// imagen
+		// resize
+		images[currentImage]:resize(images[currentImage]:getWidth()/2, images[currentImage]:getHeight()/2)
+		// posicionar el anchor point de la imagen en la esquina
+		images[currentImage]:setAnchorPoint(0,0)
+		// dibuja la imagen desde la esquina
+		images[currentImage]:draw(0, 0, OUTPUT_W, OUTPUT_H)
+		wait = 100
+		
+		// sonido
+		sndSp = -0.2
+		snd:setSpeed(-0.2)
+		snd:setVolume(1)
+		
+		// font
+		fntTr = 10
+		fntR = 0
+		fntG = 0
+		fntB = 0
+	end
+	
+	// font
+	ofSetColor(fntR,fntG,fntB,fntTr)
+	// speed text output
+	fnt:loadFont(gaImportFile("Grotk.0.ttf"), 20, false, false)
+	fnt:drawString(string.format("SPEED %i", wait), OUTPUT_W/2-70, 140)
+	fnt:drawString(string.format("%i", sndSp), OUTPUT_W/2+50, 140)
+	// dont text
+	fnt:loadFont(gaImportFile("Grotk.0.ttf"), 150, false, false)
+	fnt:drawString("dont", OUTPUT_W/2-fntSz/1.5, OUTPUT_H/6+fntSz/2)
+	// Dd text
+	fnt:loadFont(gaImportFile("Grotk.0.ttf"), fntSz, false, false)
+	fnt:drawString("Dd", OUTPUT_W/2-fntSz/1.5, (OUTPUT_H/2+OUTPUT_H/8)+fntSz/2)end

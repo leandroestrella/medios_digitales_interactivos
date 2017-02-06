@@ -1,0 +1,50 @@
+/*
+Practica E5
+tablas y/o clases
+GAmuza 043x / tabla creciente + clase + mouse [161116]
+[created by mj / modified by le]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+maxCosas = 6
+actualCosa = 0
+cosas = {}
+
+font = ofTrueTypeFont()
+fontSize = 14
+
+function setup()
+	font:loadFont(gaImportFile("Arial Rounded Bold.ttf"),fontSize,true,true,true)
+end
+
+function update()
+
+	for i = 0, actualCosa-1 do  // actualiza datos para las cosas actualmente creadas
+		if actualCosa > 0 then
+			cosas[i]:update()
+		end
+	end	
+end
+
+function draw()
+	gaBackground(0.9,0.35)
+	
+	for i = 0, actualCosa-1 do
+    		cosas[i]:draw()
+    		ofSetColor(255)
+    		font:drawString(tostring(actualCosa),cosas[i].px+34,cosas[i].py+45) 
+	end   
+end
+
+function mouseReleased()
+	if actualCosa < maxCosas then
+		// iguala la tabla a la clase
+		cosas[actualCosa] = cosa(gaMouseX(), gaMouseY(), actualCosa)		// incrementa el contador de pelotas con cada evento del ratón
+		actualCosa += 1
+	elseif actualCosa == maxCosas then
+		// reset tabla
+		cosas[actualCosa] = 1
+		// reset contador
+	 	actualCosa = 1
+	end
+end

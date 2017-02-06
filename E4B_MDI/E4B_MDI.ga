@@ -1,0 +1,43 @@
+/*
+Practica E4B
+Interactividad en ratón [161107]
+[GAmuza 043 E-4-4 Formas irregulares lineales / modified by le]
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]*/
+function setup()
+	ofEnableSmoothing()end
+function draw()
+	// fondo blanco opaco
+	gaBackground(ofRandom(gaMouseX())/255,ofRandom(gaMouseY())/255,ofRandom(gaMouseX())/255,1)
+	
+	// sin relleno
+	ofNoFill()
+	
+	// grosor línea
+	ofSetLineWidth(ofRandom(gaMouseY()+(ofRandom(gaMouseX()))))
+	
+	// color línea
+	ofSetColor((gaMouseY()+ofRandom(OUTPUT_H/2)*ofRandom(OUTPUT_W/2))/255,(gaMouseX()+ofRandom(OUTPUT_H/2)*ofRandom(OUTPUT_W/2))/255,(gaMouseX()+ofRandom(OUTPUT_H/2)*ofRandom(OUTPUT_W/2))/255)
+	
+	// empieza forma
+	ofBeginShape()
+		ofVertex(0, 0)
+		ofVertex(gaMouseX(), gaMouseY())
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(0, OUTPUT_H/2)
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(0, OUTPUT_H)
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(0, OUTPUT_W/2)
+		ofVertex(gaMouseX(), gaMouseY())
+		ofVertex(OUTPUT_W/2, 0)
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(OUTPUT_W, 0)
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(OUTPUT_H/2, 0)
+		ofVertex(gaMouseX()+ofRandom(OUTPUT_H/2), gaMouseY()+ofRandom(OUTPUT_W/2))
+		ofVertex(0, OUTPUT_W)
+		ofVertex(gaMouseX(), gaMouseY())
+		ofVertex(OUTPUT_H, 0)
+		ofVertex(OUTPUT_W, OUTPUT_H)
+     // termina forma	ofEndShape(true)	// forma cerrada
+end

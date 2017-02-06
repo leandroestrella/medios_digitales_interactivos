@@ -1,0 +1,66 @@
+/*
+Practica E2A
+Estructuras de programación básicas
+[160928] Input Vol Pitch
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+radio = 100
+posX = OUTPUT_W/2
+posXpitch = OUTPUT_W/2
+posY = OUTPUT_H/2
+incR = 5
+incX = 3
+inputVol = 0.0
+inputPitch = 0.0
+colorR = ofRandom(255)
+colorG = ofRandom(255)
+colorB = ofRandom(255)
+
+function setup()
+	ofSetCircleResolution(90)
+	colorRi = ofRandom(255)
+	colorGi = ofRandom(255)
+	colorBi = ofRandom(255)
+end
+
+function update()
+	inputVol = gaGetVolume(0) * 1000
+	inputPitch = gaGetPitch(0) * 300
+	radio += inputVol
+	
+	// variable radio
+	if inputVol > 0.02 then
+		radio *= 1.1
+	else
+		radio = 50
+	end
+	
+	// variable color
+	if inputVol > 0.03 then
+		colorR *= inputPitch*ofRandom(255)
+		colorG *= inputPitch*ofRandom(255)
+		colorB *= inputPitch*ofRandom(255)
+	else
+		colorR = colorRi
+		colorG = colorGi
+		colorB = colorBi
+	end
+end
+
+function draw()
+     gaBackground(0.0,0.0)
+     ofFill()
+     
+     // circulo izquierda
+     ofSetColor(255, 50)
+     ofCircle(posX/2,posY,radio)
+     
+     // circulo central
+     ofSetColor(colorR, colorG, colorB, 50)
+     ofCircle(posX,posY,radio)
+     
+     // circulo derecha
+     ofSetColor(255, 50)
+     ofCircle(posX/2+posX,posY,radio)
+end

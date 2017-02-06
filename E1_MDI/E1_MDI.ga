@@ -1,0 +1,106 @@
+/*
+Practica E1 [+ audioInput]
+Composición formas geométricas regulares
+Alexis Leandro Estrella [http://cargocollective.com/leandroestrella]
+*/
+
+// variables globales para color
+colR = 0
+colG = 0
+colB = 255
+colA = 255/2
+
+// variables rectangulo
+rectX = 0
+rectY = 0
+
+// variables ellipse
+ellSa = 0
+ellSb = 0
+
+// variables tiempo
+tpoColor = 1000
+tpoPos = 100
+tpoEll = 10
+
+// input audio
+inputVol = 0.0
+inputPitch = 0.0
+
+function setup()
+end
+
+function update() //hay que ver como funcionan los tiempos
+	// velocidad tamano ellipse
+	if ofGetElapsedTimeMillis() > tpoEll then
+		// tamano ellipse random
+		ellSa = ofRandom(1000)
+		ofResetElapsedTimeCounter()
+	end
+	
+	// velocidad posicion rectangulos
+	if ofGetElapsedTimeMillis() > tpoPos then
+		// posicion rectangulos random
+		rectX = ofRandom(OUTPUT_W)
+		rectY = ofRandom(OUTPUT_H)
+		ofResetElapsedTimeCounter()
+	end
+	
+	// velocidad colores de fondo
+	if ofGetElapsedTimeMillis() > tpoColor then
+		// colores random
+		colR = ofRandom(255)
+		colG = ofRandom(255)
+		colB = ofRandom(255)
+		colA = ofRandom(1, 255/2)
+		ofResetElapsedTimeCounter()
+	end
+end
+
+function draw()
+     gaBackground(0.0,0.0)
+     ofEnableSmoothing()
+     
+     // ellipses sin movimiento
+     ofNoFill()
+     ofSetColor(1)
+     ofSetLineWidth(10)
+     ofEllipse(OUTPUT_W/6,OUTPUT_H/2,500,500)
+     ofFill()
+     ofEllipse(OUTPUT_W/4,OUTPUT_H/2,300,300)
+     ofNoFill()
+     ofEllipse(OUTPUT_W/2,OUTPUT_H/2,1000,1000)
+     ofFill()
+     ofEllipse(OUTPUT_W/4+OUTPUT_W/2,OUTPUT_H/2,300,300)
+     ofNoFill()
+     ofEllipse(OUTPUT_W/1.2,OUTPUT_H/2,500,500)
+     
+     // 2 rectangulos quietos
+     ofFill()
+     ofSetColor(1, 50)
+     ofSetRectMode(OF_RECTMODE_CENTER)
+     cuadS = 250
+     ofRect(OUTPUT_W/6,OUTPUT_H/2, cuadS, cuadS)
+     ofRect(OUTPUT_W/1.2,OUTPUT_H/2, cuadS, cuadS)
+     
+     // ellipse central en movimiento
+     ofFill()
+     ofSetColor(1)
+     ofEllipse(OUTPUT_W/2,OUTPUT_H/2,ellSa,ellSa)
+     
+     // 2 rectangulos con posicion random
+     ofFill()
+     ofSetColor(1)
+     ofSetRectMode(OF_RECTMODE_CENTER)
+     rectS = 300
+     ofRect(rectX,rectY,rectS,rectS)
+     ofRect(rectY,rectX,rectS,rectS)
+     
+     // color con valores random
+     ofSetColor(colR, colG, colB, colA)
+     
+     // ellipse de fondo
+     ofFill()
+     ellSb = ofRandom(OUTPUT_W)
+     ofEllipse(OUTPUT_W/2,OUTPUT_H/2,ellSb,ellSb)
+end

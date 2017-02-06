@@ -1,0 +1,73 @@
+//////////////////////////////////
+///// clase cosa
+
+class 'cosa'
+
+// constructor
+function cosa:__init(px,py,id)
+	self.px = px
+	self.py = py
+	self.radio = 40
+	self.radio2 = 10
+	self.radio3 = 40
+	self.id= id
+	self.vx = ofRandom(-10,5)
+	self.vy = ofRandom(-5,10)
+	self.parpadea = 0
+end
+
+function cosa:update()	
+	self.px += self.vx
+	self.py += self.vy
+	self.parpadea = math.floor(ofRandom(5, 8))
+	
+	if self.px <= 40 or self.px+120 > OUTPUT_W - self.radio*2 then
+		self.vx *= -1.1
+	end
+
+	if self.py-80 <= 0 or self.py+80 > OUTPUT_H - self.radio*2 then
+		self.vy *= -1.1
+	end
+	
+	if ofGetElapsedTimeMillis()%self.parpadea == 0 then
+		self.radio3 = 0
+		self.radio2 = 4
+		self.radio = 35
+	else
+		self.radio3 = 40
+		self.radio2 = 10
+		self.radio = 40
+	end
+end
+
+function cosa:draw()
+	ofSetCircleResolution(ofRandom(4,6))
+	ofFill()
+	ofSetColor(255)
+	ofCircle(self.px-70, self.py+20, self.radio3*2) //relleno ala izquierda
+	ofCircle(self.px+150, self.py+20, self.radio3*2) //relleno ala derecha
+
+	ofSetColor(0)
+	ofSetLineWidth(2)
+	ofNoFill()
+	ofCircle(self.px-80, self.py+20, self.radio3*2) //ala izquierda
+	ofCircle(self.px+160, self.py+20, self.radio3*2) //ala derecha
+
+	ofSetCircleResolution(ofRandom(2,25))
+	ofFill()
+	ofSetColor(0)
+	ofCircle(self.px+40, self.py+80, self.radio*2)	//cabeza
+
+	ofSetCircleResolution(30)
+	ofSetColor(255)
+	ofCircle(self.px+10, self.py+60, self.radio2) //ojo izquierdo
+	ofCircle(self.px+70, self.py+60, self.radio2) //ojo derecho
+	ofEllipse(self.px+40, self.py+105, self.radio2*6, self.radio2*ofRandom(4.5)) //boca
+	
+	ofSetColor(0)
+	ofCircle(self.px+10, self.py+60, self.radio2/ofRandom(1.5,3.5)) //pupila izquierdo
+	ofCircle(self.px+70, self.py+60, self.radio2/ofRandom(1.5,3.5)) //pupila derecho
+end
+
+////////// FIN CLASE
+///////////////////////////////////////
