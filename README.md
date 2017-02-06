@@ -15,11 +15,11 @@ Hardware:
 - Speakers
 
 Documentation:
-- E1_MDI: (upcoming)
-- E2A_MDI: (upcoming)
-- E2B_MDI: (upcoming)
-- E3A_MDI: (upcoming)
-- E3B_MDI: (upcoming)
-- E4A_MDI: (upcoming)
-- E4B_MDI: (upcoming)
-- E5_MDI: (upcoming)
+- E1_MDI: https://youtu.be/lweoABZhCQU
+- E2A_MDI: https://youtu.be/xuHJV7TonkQ
+- E2B_MDI: https://youtu.be/5tYS4hdkv98
+- E3A_MDI: https://youtu.be/XsAKJ9DDO8g
+- E3B_MDI: https://youtu.be/icdBegWGzQo
+- E4A_MDI: https://youtu.be/fL7Unk8Ifxo
+- E4B_MDI: https://youtu.be/BBi3_5bkyjs
+- E5_MDI: https://youtu.be/ApRrSiR3sPc
