@@ -15,4 +15,11 @@ Hardware:
 - Speakers
 
 Documentation:
-- Video: (upcoming)
+- E1_MDI: (upcoming)
+- E2A_MDI: (upcoming)
+- E2B_MDI: (upcoming)
+- E3A_MDI: (upcoming)
+- E3B_MDI: (upcoming)
+- E4A_MDI: (upcoming)
+- E4B_MDI: (upcoming)
+- E5_MDI: (upcoming)
